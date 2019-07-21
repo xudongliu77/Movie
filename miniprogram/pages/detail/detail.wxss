@@ -1,0 +1,278 @@
+.detail-container {
+  height: 400rpx;
+  filter: blur(40rpx);
+  opacity: 0.4;
+}
+
+.detail-mask {
+  position: absolute;
+  width: 100%;
+  height: 400rpx;
+  background-color: #333;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.detail-img {
+  width: 280rpx;
+  height: 90%;
+  margin-right: 24rpx;
+}
+
+.detail-info {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400rpx;
+  padding: 20rpx;
+}
+
+.detail {
+  flex-grow: 1;
+  line-height: 50rpx;
+}
+
+.detail view {
+  color: #fff;
+  font-size: 24rpx;
+}
+
+.detail .detail-nm {
+  font-size: 40rpx;
+  font-weight: 700;
+  padding-right: 20rpx;
+}
+
+.detail-onm {
+  padding-right: 20rpx;
+}
+
+.detail-rating {
+  display: flex;
+  padding-right: 200rpx;
+  align-items: baseline;
+}
+
+.detail.sc {
+  color: #fc0;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+/***************  简介  ***************/
+
+.desc {
+  padding: 20rpx 20rpx 50rpx 20rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+}
+
+.desc-text {
+  text-align: justify;
+  color: #555;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.desc-text.hide {
+  -webkit-line-clamp: 3;
+}
+
+.desc-text.show {
+  -webkit-line-clamp: 0;
+}
+
+.desc-state {
+  color: #1296db;
+  font-size: 30rpx;
+  padding-top: 10rpx;
+  float: right;
+}
+
+/*.desc::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #e6e6e6;
+  transform: scaleY(0.5);
+}*/
+
+/***************  主演  ***************/
+
+.body {
+  padding-left: 20rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+}
+
+.head-title {
+  font-size: 30rpx;
+  line-height: 50rpx;
+  padding-top: 10rpx;
+}
+
+.casts {
+  display: flex;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+
+.casts-card {
+  width: 200rpx;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+
+.casts-card image {
+  height: 250rpx;
+  width: 100%;
+  border-radius: 5px;
+}
+
+.casts-nm {
+  color: #555;
+  font-size: 30rpx;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 10rpx;
+  padding-bottom: 10rpx;
+}
+
+/*
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  */
+
+.photos {
+  display: flex;
+}
+
+.photos-card {
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+
+/***************  剧照  ***************/
+
+/***************  影评  ***************/
+
+.reviews {
+  padding: 10rpx;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.reviews-info {
+  display: flex;
+}
+
+.reviews-nm {
+  color: #1296db;
+  padding-top: 10rpx;
+  padding-left: 10rpx;
+}
+
+.reviews-content {
+  text-align: justify;
+  padding: 0 10rpx 10rpx 10rpx;
+  color: #555;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+}
+
+/***************  影评  ***************/
+
+/***************  评价  ***************/
+
+.comments {
+  padding: 10rpx;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.comments-info {
+  display: flex;
+}
+
+.comments-nm {
+  color: #1296db;
+  padding-top: 10rpx;
+  padding-left: 10rpx;
+}
+
+.comments-content {
+  text-align: justify;
+  padding: 0 10rpx 10rpx 10rpx;
+  color: #555;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 4;
+}
+
+.comments-date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.date {
+  color: #e6e6e6;
+  padding-left: 10rpx;
+}
+
+.count {
+  color: #1296db;
+  padding-right: 10rpx;
+}
+
+.comment-container {
+  padding: 0 20rpx;
+}
+
+.van-rate {
+  padding: 12rpx;
+}
+
+.comment-img {
+  width: 210rpx;
+  height: 210rpx;
+  margin: 20rpx 20rpx 0 0;
+}
+
+.van-button {
+  display: flex;
+  justify-content: center;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+}
+
+.van-btn {
+  padding-bottom: 20rpx;
+}
+
+/***************  评价  ***************/

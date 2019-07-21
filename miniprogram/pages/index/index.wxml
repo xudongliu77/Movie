@@ -1,0 +1,21 @@
+<view class="movie" wx:for="{{movielist}}" wx:key="{{index}}" bindtap="gotodetail" data-movieid="{{item.id}}">
+  <image class="movie-img" src="{{item.images.small}}"></image>
+  <view class="movie-info">
+    <text class="movie-title">{{item.title}}</text>
+    <view class="movie-text">豆瓣评分：
+      <text class="movie-score">{{item.rating.average}}</text>
+    </view>
+    <view class="movie-director">导演：
+      <text wx:key="{{index}}" wx:for="{{item.directors}}">{{item.name}} </text>
+    </view>
+    <view class="movie-casts">主演：
+      <text wx:key="{{index}}" wx:for="{{item.casts}}">{{item.name}} </text>
+    </view>
+    <view class="movie-time">片长：{{item.durations[0]}}</view>
+    <view class="movie-genres">
+      <view style="padding-right: 10rpx;" wx:key="{{index}}" wx:for="{{item.genres}}">
+        <van-tag color="#ffe1e1" text-color="#ad0000" plain>{{item}}</van-tag>
+      </view>
+    </view>
+  </view>
+</view>
