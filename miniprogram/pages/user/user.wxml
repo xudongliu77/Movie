@@ -16,15 +16,21 @@
 
 <view style="display:flex">
 	<view style="diplay:flex; flex-direction: column;" bindtap="">
-		<van-icon name="browsing-history" size="50px" color="yellow" />
+		<view style="display: flex; justify-content: center;">
+			<van-icon name="browsing-history" size="50px" color="yellow" />
+		</view>
 		<view> 浏览记录 </view>
 	</view>
 	<view style="diplay:flex; flex-direction: column;" bindtap="">
-		<van-icon name="star" size="50px" color="yellow" />
+		<view style="display: flex; justify-content: center;">
+			<van-icon name="star" size="50px" color="yellow" />
+		</view>
 		<view> 我的收藏 </view>
 	</view>
 	<view style="diplay:flex; flex-direction: column;" bindtap="">
-		<van-icon name="comment" size="50px" color="yellow" />
+		<view style="display: flex; justify-content: center;">
+			<van-icon name="comment" size="50px" color="yellow" />
+		</view>
 		<view> 我的评价 </view>
 	</view>
 </view>
