@@ -3,12 +3,13 @@ const cloud = require('wx-server-sdk')
 
 cloud.init()
 
-var rp = require('request-promise');
-
+//var rp = require('request-promise');
+const axios = require('axios')
+/*
 // 云函数入口函数
 exports.main = async (event, context) => {
-  
-  return await rp(`http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=${event.start}&count=${event.count}`)
+
+  return await rp(`https://frodo.douban.com/api/v2/subject_collection/movie_showing/items?start=${event.start}&count=${event.count}&apiKey=054022eaeae0b00e0fc068c0c0a2102a`)
     .then(function (res) {
       console.log(res);
       return res;
@@ -16,4 +17,28 @@ exports.main = async (event, context) => {
     .catch(function (err) {
       console.err(err);
     });
+}
+*/
+// 云函数入口函数
+
+exports.main = async (event, context) => {
+  try {
+    const {
+      data
+    } = await axios({
+      url: `https://frodo.douban.com/api/v2/subject_collection/movie_showing/items?start=${event.start}&count=${event.count}&apiKey=054022eaeae0b00e0fc068c0c0a2102a`,
+      method: 'get',
+      headers: {
+        "Host": "frodo.douban.com",
+        "Connection": "keep-alive",
+        'content-type': 'application/json',
+        'Accept-Encoding': 'gzip,compress,br,deflate',
+        'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.2(0x18000236) NetType/WIFI Language/zh_CN',
+        'Referer': 'https://servicewechat.com/wx2f9b06c1de1ccfca/81/page-frame.html'
+      }
+    })
+    return data
+  } catch (e) {
+    console.log(e)
+  }
 }

@@ -13,16 +13,74 @@ Page({
     images: [], // 上传的图片
     fileIds: [],
     movieId: -1,
+    movie: '', // 电影名称
     active: 0, // 标签页
-    isFolded: true,
+    isFolded: false,
+    isHide: false,
+    activeNames: [],
   },
-  Fold: function(e) {
+  /*
+    //获取电影详情
+    getDetail(movieid) {
+      wx.showLoading({
+        title: '加载中'
+      })
+      wx.request({
+        url: `https://frodo.douban.com/api/v2/movie/${movieid}?apiKey=054022eaeae0b00e0fc068c0c0a2102a`,
+        success: res => {
+          //console.log(res.data)
+          this.setData({
+            detail: res.data
+          })
+          wx.hideLoading()
+        }
+      })
+    },
+  */
+  onChange(event) {
+    this.setData({
+      activeNames: event.detail
+    });
+  },
+
+  Fold: function (e) {
     this.setData({
       isFolded: !this.data.isFolded,
     })
+    // console.log("click");
   },
 
-  submit: function() {
+  // 是否显示 展开 收起
+  onFold: function (e) {
+    var query = this.createSelectorQuery();
+    query.select('#content').boundingClientRect(rect => {
+      // let height = rect.height;
+      // console.log('content.height = ' + height);
+    });
+    query.select('#frame').boundingClientRect(rect => {
+      // let height = rect.height;
+      // console.log('frame.height = ' + height);
+    });
+    query.exec(res => {
+      // console.log(res[0].height);
+      // console.log(res[1].height);
+      if (res[0] && res[0].height) {
+        if (res[0].height > res[1].height) {
+          this.setData({
+            isHide: true,
+          });
+          // console.log(this.data.isHide);
+        } else {
+          this.setData({
+            isHide: false,
+          });
+          // console.log(this.data.isHide);
+        }
+      }
+    })
+  },
+
+  submit: function () {
     wx.showLoading({
       title: '提交中',
     })
@@ -57,6 +115,7 @@ Page({
           content: this.data.content,
           score: this.data.score,
           movieid: this.data.movieId,
+          movie: this.data.movie,
           fileIds: this.data.fileIds
         }
       }).then(res => {
@@ -74,19 +133,20 @@ Page({
     });
 
   },
-  onContentChange: function(event) {
+
+  onContentChange: function (event) {
     this.setData({
       content: event.detail
     });
   },
 
-  onScoreChange: function(event) {
+  onScoreChange: function (event) {
     this.setData({
       score: event.detail
     });
   },
 
-  uploadImg: function() {
+  uploadImg: function () {
     // 选择图片
     wx.chooseImage({
       count: 9,
@@ -103,82 +163,128 @@ Page({
     })
   },
 
+  copyBtn: function () {
+    wx.setClipboardData({
+      data: this.data.detail.trailer.sharing_url,
+      success(res) {
+        wx.getClipboardData({
+          success(res) {
+            console.log('复制成功') // data
+          }
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.setData({
-      movieId: options.movieid
+      movieId: options.movieid,
     });
+    console.log(options);
+
+    //this.getDetail(options.movieid);
 
     wx.showLoading({
       title: '加载中',
     })
-    console.log(options);
 
     wx.cloud.callFunction({
-      name: 'getDetail',
-      data: {
-        movieid: options.movieid
-      }
-    }).then(res => {
-      // console.log(res);
-      this.setData({
-        detail: JSON.parse(res.result)
+        name: 'getDetail',
+        data: {
+          movieid: options.movieid
+        }
+      })
+      .then(res => {
+        //console.log(res);
+        this.setData({
+          detail: res.result,
+          movie: res.result.title,
+        });
+
+        this.onFold();
+
+        wx.hideLoading();
+      }).catch(err => {
+        console.error(err);
+        wx.hideLoading();
       });
-      wx.hideLoading();
-    }).catch(err => {
-      console.error(err);
-      wx.hideLoading();
-    });
+
+
+
+    /*
+        //展示评价
+        let that = this;
+        let contentArr = [];
+        let scoreArr = [];
+        db.collection("comment").get({
+          success(res) {
+            console.log("请求成功", res.data)
+            let dataList = res.data;
+            for (let i = 0; i < dataList.length; i++) {
+              contentArr.push(dataList[i].content),
+                scoreArr.push(dataList[i].score)
+            }
+            that.setData({
+              content: contentArr,
+              score: scoreArr
+            })
+          },
+          fail(res) {
+            console.log("请求失败", res)
+          }
+        })
+    */
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {
+  onPullDownRefresh: function () {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

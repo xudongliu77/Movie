@@ -1,0 +1,30 @@
+<view>
+	<block wx:if="{{!isLogin}}">
+		<button bindtap="getUserProfile"> 登陆 </button>
+	</block>
+	<block wx:else>
+		<view class="profile">
+			<view class="profile-img">
+				<image src="{{userInfo.avatarUrl}}"></image>
+			</view>
+			<text class="profile-name">{{userInfo.nickName}}</text>
+		</view>
+		<view wx:key="index" wx:for="{{titleArr}}">{{item}}</view>
+	</block>
+</view>
+
+
+<view style="display:flex">
+	<view style="diplay:flex; flex-direction: column;" bindtap="">
+		<van-icon name="browsing-history" size="50px" color="yellow" />
+		<view> 浏览记录 </view>
+	</view>
+	<view style="diplay:flex; flex-direction: column;" bindtap="">
+		<van-icon name="star" size="50px" color="yellow" />
+		<view> 我的收藏 </view>
+	</view>
+	<view style="diplay:flex; flex-direction: column;" bindtap="">
+		<van-icon name="comment" size="50px" color="yellow" />
+		<view> 我的评价 </view>
+	</view>
+</view>

@@ -8,7 +8,7 @@ Page({
     movielist: [],
   },
 
-  getMovielist: function() {
+  getMovielist: function () {
     wx.showLoading({
       title: '加载中',
     })
@@ -21,7 +21,7 @@ Page({
     }).then(res => {
       //  console.log(res);
       this.setData({
-        movielist: this.data.movielist.concat(JSON.parse(res.result).subjects)
+        movielist: this.data.movielist.concat(res.result.subject_collection_items)
       })
       wx.hideLoading();
     }).catch(err => {
@@ -29,7 +29,7 @@ Page({
       wx.hideLoading();
     });
   },
-  gotodetail: function(event) {
+  gotodetail: function (event) {
     wx.navigateTo({
       url: `../detail/detail?movieid=${event.currentTarget.dataset.movieid}`,
     });
@@ -38,54 +38,62 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function(options) {
+  onLoad: function (options) {
     this.getMovielist();
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
+  onReady: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
+  onShow: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function() {
+  onHide: function () {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function() {
+  onUnload: function () {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function() {},
+  onPullDownRefresh: function () {
+    wx.showNavigationBarLoading();
+    //要刷新请求服务器的方法
+    this.getMovielist();
+    //隐藏导航栏加载框
+    wx.hideNavigationBarLoading();
+    //停止下拉事件
+    wx.stopPullDownRefresh();
+  },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function() {
+  onReachBottom: function () {
     this.getMovielist();
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function() {
+  onShareAppMessage: function () {
 
   }
 })

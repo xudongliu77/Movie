@@ -14,25 +14,27 @@
   z-index: -1;
 }
 
-.detail-img {
-  width: 280rpx;
-  height: 90%;
-  margin-right: 24rpx;
-}
-
 .detail-info {
   display: flex;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 94.94%;
   height: 400rpx;
   padding: 20rpx;
+}
+
+.detail-img {
+  width: 280rpx;
+  height: 90%;
+  margin-right: 24rpx;
+  border-radius: 20rpx;
 }
 
 .detail {
   flex-grow: 1;
   line-height: 50rpx;
+  height: 90%;
 }
 
 .detail view {
@@ -43,17 +45,20 @@
 .detail .detail-nm {
   font-size: 40rpx;
   font-weight: 700;
-  padding-right: 20rpx;
+  margin-top: 10rpx;
 }
 
-.detail-onm {
-  padding-right: 20rpx;
+.detail-alias {
+  font-size: 24rpx;
+  font-weight: 700;
+  margin-top: 20rpx;
 }
 
 .detail-rating {
+  height: 60rpx;
   display: flex;
-  padding-right: 200rpx;
-  align-items: baseline;
+  padding-right: 160rpx;
+  align-items: center;
 }
 
 .detail.sc {
@@ -62,15 +67,58 @@
   font-weight: 700;
 }
 
+.detail.rate {
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+}
+
+.detail-genres {
+  display: flex;
+}
+
 /***************  简介  ***************/
 
-.desc {
-  padding: 20rpx 20rpx 50rpx 20rpx;
+/*  .intro {
+  padding: 20rpx;
   border-bottom: 1rpx solid #e6e6e6;
 }
 
-.desc-text {
+.intro-text {
   text-align: justify;
+  color: #555;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+  z-index: -1;
+}
+
+.intro-text.hide {
+  -webkit-line-clamp: 5;
+}
+
+.intro-text.show {
+  -webkit-line-clamp: 0;
+}
+
+.intro-state {
+  color: #1296db;
+  font-size: 30rpx;
+  line-height: 50rpx;
+  float: right;
+  margin-top: -40rpx;
+  padding-left: 10rpx;
+  z-index: 1;
+  background-color: white;
+} */
+.intro {
+  padding: 20rpx;
+  /* border-bottom: 1rpx solid #e6e6e6; */
+  text-align: left;
   color: #555;
   font-size: 30rpx;
   line-height: 50rpx;
@@ -80,19 +128,33 @@
   text-overflow: ellipsis;
 }
 
-.desc-text.hide {
-  -webkit-line-clamp: 3;
+.frame {
+  width: 100%;
+  text-align: left;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  white-space: normal !important;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 
-.desc-text.show {
-  -webkit-line-clamp: 0;
+.nofold {
+  display: block;
+  text-overflow: unset;
+  -webkit-line-clamp: unset;
+  max-height: unset;
 }
 
-.desc-state {
+.arrow {
   color: #1296db;
   font-size: 30rpx;
-  padding-top: 10rpx;
+  line-height: 50rpx;
   float: right;
+  margin-top: -50rpx;
+  background-color: white;
+  opacity: 0.7;
 }
 
 /*.desc::before {
@@ -116,11 +178,9 @@
 
 .head-title {
   font-size: 30rpx;
-  line-height: 50rpx;
-  padding-top: 10rpx;
 }
 
-.casts {
+.actors {
   display: flex;
 }
 
@@ -130,19 +190,19 @@
   color: transparent;
 }
 
-.casts-card {
-  width: 200rpx;
+.actors-card {
+  width: 180rpx;
   margin-top: 20rpx;
   margin-right: 20rpx;
 }
 
-.casts-card image {
+.actors-card image {
   height: 250rpx;
   width: 100%;
   border-radius: 5px;
 }
 
-.casts-nm {
+.actors-nm {
   color: #555;
   font-size: 30rpx;
   text-align: center;
@@ -169,6 +229,7 @@
 .photos-card {
   margin-top: 20rpx;
   margin-right: 20rpx;
+  margin-bottom: 10rpx;
 }
 
 /***************  剧照  ***************/
@@ -251,28 +312,55 @@
 }
 
 .comment-container {
-  padding: 0 20rpx;
+  padding: 0rpx;
 }
 
 .van-rate {
-  padding: 12rpx;
-}
-
-.comment-img {
-  width: 210rpx;
-  height: 210rpx;
-  margin: 20rpx 20rpx 0 0;
-}
-
-.van-button {
-  display: flex;
-  justify-content: center;
+  height: 60rpx;
+  padding-left: 20rpx;
   padding-top: 20rpx;
   padding-bottom: 20rpx;
 }
 
+.comment-img {
+  width: 206rpx;
+  height: 206rpx;
+  margin: 16rpx 17rpx 16rpx 17rpx;
+}
+
+.imgModel {
+  width: 206rpx;
+  height: 206rpx;
+  background-color: #F3F4F6;
+  display: flex;
+  justify-content: center;
+  margin: 32rpx;
+}
+
+.van-button {
+  padding: 0rpx 30rpx 30rpx 30rpx;
+}
+
 .van-btn {
-  padding-bottom: 20rpx;
+  padding: 0rpx 30rpx 30rpx 30rpx;
 }
 
 /***************  评价  ***************/
+
+.trailers,
+.clips,
+.bloopers {
+  display: flex;
+  flex-direction: column;
+}
+
+.trailers-img {
+  width: 90%;
+  height: 240rpx;
+  margin: 0 auto;
+}
+
+.copyBtn {
+  padding-top: 40rpx;
+  padding-bottom: 20rpx;
+}

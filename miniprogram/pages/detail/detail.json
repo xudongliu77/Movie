@@ -1,10 +1,15 @@
 {
   "usingComponents": {
-    "van-field": "vant-weapp/field",
-    "van-rate": "vant-weapp/rate",
-    "van-button": "vant-weapp/button",
-    "van-tab": "vant-weapp/tab/index",
-    "van-tabs": "vant-weapp/tabs/index"
+    "van-field": "@vant/weapp/field",
+    "van-rate": "@vant/weapp/rate",
+    "van-button": "@vant/weapp/button",
+    "van-tag": "@vant/weapp/tag",
+    "van-tab": "@vant/weapp/tab",
+    "van-tabs": "@vant/weapp/tabs",
+    "van-collapse": "@vant/weapp/collapse",
+    "van-collapse-item": "@vant/weapp/collapse-item",
+    "van-divider": "@vant/weapp/divider",
+    "van-icon": "@vant/weapp/icon"
   },
   "navigationBarTitleText": "影片详情"
 }

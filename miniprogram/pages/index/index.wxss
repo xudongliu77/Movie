@@ -1,14 +1,15 @@
 .movie {
-  height: 252rpx;
+  height: 240rpx;
   display: flex;
   padding: 10px;
   border-bottom: 1px solid #e6e6e6;
 }
 
 .movie-img {
-  width: 150rpx;
+  width: 180rpx;
   height: 100%;
   margin-right: 20rpx;
+  border-radius: 15rpx;
 }
 
 .movie-info {
@@ -27,16 +28,17 @@
 
 .movie-text {
   color: #bfbfbf;
-  font-size: 26rpx;
-  line-height: 40rpx;
+  font-size: 30rpx;
+  line-height: 60rpx;
 }
 
 .movie-score {
   color: #faaf00;
-  line-height: 40rpx;
+  line-height: 60rpx;
 }
 
-.movie-director, .movie-casts {
+.movie-director,
+.movie-casts {
   color: #bfbfbf;
   font-size: 30rpx;
   line-height: 40rpx;
@@ -45,13 +47,12 @@
   white-space: nowrap;
 }
 
-.movie-time {
+.movie-year {
   color: #bfbfbf;
   font-size: 30rpx;
   line-height: 40rpx;
 }
 
-.movie-genres {
+/* .movie-genres {
   display: flex;
-  flex-wrap: nowrap;
-}
+} */

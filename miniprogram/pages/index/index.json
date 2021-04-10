@@ -1,6 +1,4 @@
 {
-  "usingComponents": {
-    "van-button": "vant-weapp/button",
-    "van-tag": "vant-weapp/tag"
-  }
+  "usingComponents": {},
+  "enablePullDownRefresh": true
 }

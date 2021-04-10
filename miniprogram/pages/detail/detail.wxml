@@ -1,128 +1,217 @@
 <view class=''>
-  <view class='detail-container' style='background: url({{detail.images.large}}) no-repeat  top/cover'></view>
-  <view class='detail-mask'></view>
-  <view class='detail-info'>
-    <image src="{{detail.images.large}}" class='detail-img'></image>
-    <view class='detail'>
-      <view class='detail-nm'>{{detail.title}}</view>
-      <view class='detail-onm'>{{detail.original_title}}</view>
-      <view class='detail-rating'>
-        <view class='detail.sc'>{{detail.rating.average}}</view>
-        <van-rate value="{{ detail.rating.average/2 }}" allow-half />
-      </view>
-      <view>{{detail.countries[0]}}</view>
-      <view>{{detail.mainland_pubdate}}</view>
-    </view>
-  </view>
+	<view class='detail-container' style='background: url({{detail.cover.image.large.url}}) no-repeat  top/cover'></view>
+	<view class='detail-mask'></view>
+	<view class='detail-info'>
+		<image src="{{detail.cover.image.normal.url}}" class='detail-img'></image>
+		<view class='detail'>
+			<view class='detail-nm'>{{detail.title}}</view>
+			<view class='detail-alias'>{{detail.aka[0]}}</view>
+			<view class='detail-rating'>
+				<block wx:if="{{detail.rating.value}}">
+					<view class='detail.sc'>{{detail.rating.value}}</view>
+					<view class="detail.rate">
+						<van-rate value="{{ detail.rating.value/2 }}" allow-half />
+					</view>
+				</block>
+			</view>
+			<view>{{detail.durations}}</view>
+			<view>{{detail.pubdate}}</view>
 
-  <van-tabs sticky swipeable color="#e6e6e6" animated active="{{ active }}">
-    <!---------------  简介  -------------->
-    <van-tab title="简介">
+			<view class="detail-genres">
+				<view style="padding-right: 10rpx;" wx:key="index" wx:for="{{detail.genres}}">
+					<van-tag plain>{{item}}</van-tag>
+				</view>
+			</view>
 
-      <view class="desc">
-        <view class="desc-text {{isFolded?'hide':'show'}} ">
-          {{detail.summary}}
-        </view>
-        <view bindtap="Fold" class="desc-state">{{isFolded?'展开':'收起'}}</view>
-      </view>
-      <!---------------  主演  -------------->
-      <view class="body">
-        <view class="head-title">主演（部分）</view>
-        <scroll-view enable-flex="true" scroll-x="true" style=" white-space: nowrap; ">
-          <view class='casts'>
-            <view wx:for="{{detail.casts}}" wx:key="{{index}}">
-              <view style="display: inline-block">
-                <view class="casts-card">
-                  <view>
-                    <image src="{{item.avatars.small}}"></image>
-                  </view>
-                  <view class="casts-nm">{{item.name}}</view>
-                </view>
-              </view>
-            </view>
-          </view>
-        </scroll-view>
-      </view>
-      <!---------------  剧照  -------------->
-      <view class="body">
-        <view class="head-title">剧照</view>
-        <scroll-view enable-flex="true" scroll-x="true" style=" white-space: nowrap; ">
-          <view class='photos'>
-            <view wx:for="{{detail.photos}}" wx:key="{{index}}">
-              <view style="display: inline-block">
-                <view class="photos-card">
-                  <image style='height: 200rpx; width: 330rpx;border-radius: 5px;' src="{{item.image}}"></image>
-                </view>
-              </view>
-            </view>
-          </view>
-        </scroll-view>
-      </view>
+		</view>
+	</view>
 
-    </van-tab>
-    <!---------------  简介  -------------->
-    <!---------------  影评  -------------->
-    <van-tab info="{{detail.reviews_count}}" title="影评">
+	<van-tabs sticky swipeable color="#e6e6e6" animated active="{{ active }}">
+		<!---------------  简介  -------------->
+		<van-tab title="简介">
 
-      <view class='reviews' wx:for="{{detail.popular_reviews}}" wx:key="{{index}}" wx:for-item="itemf">
-        <view class='reviews-info'>
-          <image style="width: 100rpx; height: 100rpx; margin:10rpx; border-radius: 50%;" src="{{itemf.author.avatar}}" mode="scaleToFill"></image>
-          <view>
-            <view class='reviews-nm'>{{itemf.author.name}}</view>
-            <view>
-              <van-rate readonly size="{{ 16 }}" value="{{ itemf.rating.value }}" />
-            </view>
-          </view>
-        </view>
-        <view class="reviews-content">{{itemf.summary}}</view>
-      </view>
-
-    </van-tab>
-    <!---------------  影评  -------------->
-    <!---------------  评价  -------------->
-    <van-tab info="{{detail.comments_count}}" title="评价">
-
-      <view class='comments' wx:for="{{detail.popular_comments}}" wx:key="{{index}}" wx:for-item="itemf">
-        <view class='comments-info'>
-          <image style="width: 100rpx; height: 100rpx; margin:10rpx; border-radius: 50%;" src="{{itemf.author.avatar}}" mode="scaleToFill"></image>
-          <view>
-            <view class='commenrs-nm'>{{itemf.author.name}}</view>
-            <view>
-              <van-rate readonly size="{{ 16 }}" value="{{ itemf.rating.value }}" />
-            </view>
-          </view>
-        </view>
-        <view class="comments-content">{{itemf.content}}</view>
-        <view class='comments-date'>
-          <view class='date'>{{itemf.created_at}}</view>
-          <view class='count'>{{itemf.useful_count}} 有用</view>
-        </view>
-      </view>
+			<view style="font-size:30rpx; padding-left: 20rpx; padding-top: 20rpx;"> 剧情简介 </view>
+			<view class="intro">
+				<view id="frame" class='frame {{isFolded ? "nofold" : ""}}'>
+					<text id="content" >{{detail.intro}}</text>
+				</view>
+				<view>
+					<view class="arrow" bindtap="Fold">
+						<block wx:if="{{isHide}}">
+							{{isFolded?'收起':'展开'}}
+						</block>
+					</view>
+				</view>
+			</view>
 
 
+			<!---------------  主演  -------------->
+			<view class="body" wx:if="{{detail.directors.length || detail.actors.length}}">
+				<view class="head-title"> 演职人员 </view>
+				<scroll-view enable-flex="true" scroll-x="true" style=" white-space: nowrap; ">
+
+					<view class='actors'>
+						<view wx:for="{{detail.directors}}" wx:key="index">
+							<view style="display: inline-block">
+								<view class="actors-card">
+									<view>
+										<image src="{{item.avatar.normal}}"></image>
+									</view>
+									<view class="actors-nm">{{item.name}}</view>
+								</view>
+							</view>
+						</view>
+
+						<view wx:for="{{detail.actors}}" wx:key="index">
+							<view style="display: inline-block">
+								<view class="actors-card">
+									<view>
+										<image src="{{item.avatar.normal}}"></image>
+									</view>
+									<view class="actors-nm">{{item.name}}</view>
+								</view>
+							</view>
+						</view>
+
+						<view wx:for="{{detail.actors}}" wx:key="index">
+							<view style="display: inline-block">
+								<view class="actors-card">
+									<view>
+										<image src="{{item.avatar.normal}}"></image>
+									</view>
+									<view class="actors-nm">{{item.name}}</view>
+								</view>
+							</view>
+						</view>
+					</view>
+
+				</scroll-view>
+			</view>
+			<view wx:else>
+				<van-divider contentPosition="center" dashed>
+					演职人员信息暂无
+				</van-divider>
+			</view>
+			<!---------------  剧照  ------------
+			<view class="body">
+				<view class="head-title">剧照</view>
+				<scroll-view enable-flex="true" scroll-x="true" style=" white-space: nowrap; ">
+					<view class='photos'>
+						<view wx:for="{{detail.photos}}" wx:key="index">
+							<view style="display: inline-block">
+								<view class="photos-card">
+									<image style='height: 220rpx; width: 330rpx;border-radius: 5px;' src="{{item.image}}"></image>
+								</view>
+							</view>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
+-->
+		</van-tab>
+		<!---------------  简介  -------------->
+		<!---------------  影评  --------------
+		<van-tab info="{{detail.reviews_count}}" title="影评">
+
+			<view class='reviews' wx:for="{{detail.popular_reviews}}" wx:key="index" wx:for-item="itemf">
+				<view class='reviews-info'>
+					<image style="width: 100rpx; height: 100rpx; margin:10rpx; border-radius: 50%;" src="{{itemf.author.avatar}}" mode="scaleToFill"></image>
+					<view>
+						<view class='reviews-nm'>{{itemf.author.name}}</view>
+						<view>
+							<van-rate readonly size="{{ 16 }}" value="{{ itemf.rating.value }}" />
+						</view>
+					</view>
+				</view>
+				<view class="reviews-content">{{itemf.summary}}</view>
+			</view>
+
+		</van-tab>
+		-------------  影评  -------------->
 
 
-      <view class="comment-container">
+		<!---------------  评价  -------------->
+		<van-tab info="{{detail.comments_count}}" title="评价">
 
-        <van-field value="{{ content }}" type="textarea" autosize placeholder="写一些评价吧" bind:change="onContentChange" />
-        <view class="van-rate">
-          <van-rate value="{{ score }}" allow-half bind:change="onScoreChange" />
-        </view>
+			<!-- <view class='comments' wx:for="{{detail.popular_comments}}" wx:key="index" wx:for-item="itemf">
+				<view class='comments-info'>
+					<image style="width: 100rpx; height: 100rpx; margin:10rpx; border-radius: 50%;" src="{{itemf.author.avatar}}" mode="scaleToFill"></image>
+					<view>
+						<view class='comments-nm'>{{itemf.author.name}}</view>
+						<view>
+							<van-rate readonly size="{{ 16 }}" value="{{ itemf.rating.value }}" />
+						</view>
+					</view>
+				</view>
+				<view class="comments-content">{{itemf.content}}</view>
+				<view class='comments-date'>
+					<view class='date'>{{itemf.created_at}}</view>
+					<view class='count'>{{itemf.useful_count}} 有用</view>
+				</view>
+			</view> -->
 
-        <view>
-          <image class="comment-img" src="{{item}}" wx:for="{{images}}" wx:key="{{index}}"></image>
-        </view>
-        <view class="van-button">
-          <van-button type="warning" bindtap="uploadImg">上传图片</van-button>
-        </view>
-        <view class="van-btn">
-          <van-button size="large" type="danger" bindtap="submit">提交评价</van-button>
-        </view>
-      </view>
 
-    </van-tab>
-    <!---------------  评价  -------------->
-    <van-tab title="更多"></van-tab>
-  </van-tabs>
+			<view class="comment-container">
+
+				<view class="van-rate">
+					<van-rate value="{{ score }}" allow-half bind:change="onScoreChange" />
+				</view>
+
+				<van-field value="{{ content }}" type="textarea" autosize placeholder="写一些评价吧" bind:change="onContentChange" />
+
+				<view style="padding-left: 16rpx; padding-right: 16rpx">
+					<image class="comment-img" mode="scaleToFill" src="{{item}}" wx:for="{{images}}" wx:key="index"></image>
+				</view>
+				<view wx:if="{{!images.length}}" class="imgModel" bindtap="uploadImg">
+					<van-icon name="photograph" size="60rpx" color="#DDDFE1" />
+				</view>
+
+				<view wx:if="{{images.length}}" class="van-button">
+					<van-button size="large" icon="photo" type="primary" plain bindtap="uploadImg"> 添加图片 </van-button>
+				</view>
+
+				<view class="van-btn">
+					<van-button size="large" type="info" plain bindtap="submit"> 提交评价 </van-button>
+				</view>
+			</view>
+
+
+		</van-tab>
+		<!---------------  评价  -------------->
+		<van-tab title="更多">
+
+			<van-collapse value="{{ activeNames }}" bind:change="onChange">
+
+				<van-collapse-item title="预告片" name="1">
+					<view class="trailers">
+						<image class="trailers-img" mode="aspectFit" src="{{detail.trailer.cover_url}}"></image>
+						<view class="copyBtn">
+							<button plain bindtap="copyBtn"> 复制链接 </button>
+						</view>
+					</view>
+				</van-collapse-item>
+				<van-collapse-item title="精彩片段" name="2">
+					<view class="clips" wx:for="{{detail.clips}}" wx:key="index">
+						<image style="width: 100rpx; height: 100rpx; margin:10rpx;" src="{{item.small}}"></image>
+						<view class="section">
+							<text>{{item.title}}\n</text>
+							<text class="url" selectable="true">{{item.alt}}</text>
+						</view>
+					</view>
+				</van-collapse-item>
+				<van-collapse-item title="幕后花絮" name="3">
+					<view class="bloopers" wx:for="{{detail.bloopers}}" wx:key="index">
+						<image style="width: 100rpx; height: 100rpx; margin:10rpx;" src="{{item.small}}"></image>
+						<view class="section">
+							<text>{{item.title}}\n</text>
+							<text class="url" selectable="true">{{item.alt}}</text>
+						</view>
+					</view>
+				</van-collapse-item>
+
+			</van-collapse>
+
+		</van-tab>
+	</van-tabs>
 
 </view>

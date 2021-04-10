@@ -1,7 +1,7 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/wode/wode",
+    "pages/user/user",
     "pages/detail/detail"
   ],
   "window": {
@@ -15,18 +15,17 @@
     "color": "#000",
     "selectedColor": "#E54847",
     "backgroundColor": "#F6F6F6",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "text": "电影",
         "iconPath": "images/dianying.png",
         "selectedIconPath": "images/dianying_pressed.png"
       },
       {
-        "pagePath": "pages/wode/wode",
+        "pagePath": "pages/user/user",
         "text": "我的",
-        "iconPath": "images/wode.png",
-        "selectedIconPath": "images/wode_pressed.png"
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user_pressed.png"
       }
     ]
   },
