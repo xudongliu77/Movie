@@ -1,4 +1,5 @@
 // pages/profile/profile.js
+const app = getApp();
 const db = wx.cloud.database(); // 初始化数据库
 
 Page({
@@ -10,11 +11,8 @@ Page({
     userInfo: {}, // 用户信息
     hasUserInfo: false,
     isLogin: false, //登陆状态
-    openid: '',
-    titleArr: [], // 已看过电影名称
+    // openid: '',
   },
-
-
 
   getUserProfile(e) {
     wx.getUserProfile({
@@ -25,13 +23,15 @@ Page({
           hasUserInfo: true,
           isLogin: true,
         });
+        app.globalData.logged = true;
+        // console.log(app.globalData.logged);
         console.log(res.userInfo);
-        this.getOpenId();
-        this.getMovieTitle();
+        // this.getOpenId();
       }
     })
   },
 
+  // 获取用户openid
   getOpenId: function () {
     wx.cloud.callFunction({
         name: 'login',
@@ -48,31 +48,11 @@ Page({
       });
   },
 
-  // 获取用户评论过的电影名称
-  getMovieTitle: function () {
-    let that = this;
-    let movieArr = [];
-    db.collection('comment').
-    where({
-      _openid: this.openid,
-    }).get({
-      success(res) {
-        console.log("用户评论信息请求成功", res.data);
-        let movieList = res.data;
-        // console.log(movieList);
-        for (let i = 0; i < movieList.length; i++) {
-          movieArr.push(movieList[i].movie);
-        }
-        // console.log(movieArr);
-        that.setData({
-          titleArr: movieArr,
-        });
-        console.log(that.data.titleArr);
-      },
-      fail(res) {
-        console.log("用户评论信息请求失败", res);
-      }
-    })
+  // 跳转 我的评价 页面
+  gotocomment: function () {
+    wx.navigateTo({
+      url: `../comment/comment`,
+    });
   },
 
 

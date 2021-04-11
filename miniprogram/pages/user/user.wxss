@@ -1,26 +1,44 @@
 .profile {
-  background: #E54847;
+  background: #F6F6F6;
   height: 400rpx;
-  text-align: center;
-  position: relative;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20rpx;
+  border-radius: 20rpx;
 }
 
 .profile-img {
-  width: 200rpx;
-  height: 200rpx;
-  display: block;
+  width: 192rpx;
+  height: 192rpx;
   overflow: hidden;
+  margin: 100rpx 20rpx 20rpx 20rpx;
   border-radius: 50%;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 60rpx);
 }
 
 .profile-name {
   font-size: 36rpx;
-  color: #fff;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, 270rpx);
+  color: black;
+}
+
+.user-function {
+  margin: 20rpx;
+  border-radius: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  background-color: #F6F6F6;
+}
+
+.module {
+  margin: 20rpx;
+}
+
+.module-icon {
+  display: flex;
+  justify-content: center;
+}
+
+.module-text {
+  font-size: 30rpx;
+  color: #82DCF0;
 }

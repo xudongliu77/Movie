@@ -1,36 +1,38 @@
 <view>
 	<block wx:if="{{!isLogin}}">
-		<button bindtap="getUserProfile"> 登陆 </button>
+		<view class="profile" bindtap="getUserProfile">
+			<image class="profile-img" src="../../images/default.png"></image>
+			<text class="profile-name"> 登陆 </text>
+		</view>
 	</block>
 	<block wx:else>
 		<view class="profile">
-			<view class="profile-img">
-				<image src="{{userInfo.avatarUrl}}"></image>
-			</view>
+			<image class="profile-img" src="{{userInfo.avatarUrl}}"></image>
 			<text class="profile-name">{{userInfo.nickName}}</text>
 		</view>
-		<view wx:key="index" wx:for="{{titleArr}}">{{item}}</view>
 	</block>
 </view>
 
 
-<view style="display:flex">
-	<view style="diplay:flex; flex-direction: column;" bindtap="">
-		<view style="display: flex; justify-content: center;">
-			<van-icon name="browsing-history" size="50px" color="yellow" />
+<view class="user-function">
+
+	<view class="module" bindtap="">
+		<view class="module-icon">
+			<van-icon name="browsing-history" size="50px" color="#82DCF0" />
 		</view>
-		<view> 浏览记录 </view>
+		<text class="module-text"> 浏览记录 </text>
 	</view>
-	<view style="diplay:flex; flex-direction: column;" bindtap="">
-		<view style="display: flex; justify-content: center;">
-			<van-icon name="star" size="50px" color="yellow" />
+	<view class="module" bindtap="">
+		<view class="module-icon">
+			<van-icon name="star" size="50px" color="#82DCF0" />
 		</view>
-		<view> 我的收藏 </view>
+		<text class="module-text"> 我的收藏 </text>
 	</view>
-	<view style="diplay:flex; flex-direction: column;" bindtap="">
-		<view style="display: flex; justify-content: center;">
-			<van-icon name="comment" size="50px" color="yellow" />
+	<view class="module" bindtap="gotocomment">
+		<view class="module-icon">
+			<van-icon name="comment" size="50px" color="#82DCF0" />
 		</view>
-		<view> 我的评价 </view>
+		<text class="module-text"> 我的评价 </text>
 	</view>
+
 </view>

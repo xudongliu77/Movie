@@ -1,0 +1,9 @@
+<!--pages/comment/comment.wxml-->
+<view>
+	<block wx:if="{{!isLogin}}">
+		<view> 请登陆后查看 </view>
+	</block>
+	<block wx:else>
+		<view wx:key="index" wx:for="{{titleArr}}">{{item}}</view>
+	</block>
+</view>

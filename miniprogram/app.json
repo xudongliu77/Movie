@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/user/user",
-    "pages/detail/detail"
+    "pages/detail/detail",
+    "pages/comment/comment"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -13,7 +14,7 @@
   },
   "tabBar": {
     "color": "#000",
-    "selectedColor": "#E54847",
+    "selectedColor": "#82DCF0",
     "backgroundColor": "#F6F6F6",
     "list": [{
         "pagePath": "pages/index/index",
