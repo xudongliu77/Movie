@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movielist: [],
+    movielist: [], // 电影信息列表
   },
 
   getMovielist: function () {
@@ -29,6 +29,8 @@ Page({
       wx.hideLoading();
     });
   },
+
+  // 跳转详情页
   gotodetail: function (event) {
     wx.navigateTo({
       url: `../detail/detail?movieid=${event.currentTarget.dataset.movieid}`,

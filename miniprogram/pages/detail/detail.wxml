@@ -16,13 +16,11 @@
 			</view>
 			<view>{{detail.durations}}</view>
 			<view>{{detail.pubdate}}</view>
-
 			<view class="detail-genres">
 				<view style="padding-right: 10rpx;" wx:key="index" wx:for="{{detail.genres}}">
 					<van-tag plain>{{item}}</van-tag>
 				</view>
 			</view>
-
 		</view>
 	</view>
 
@@ -92,7 +90,7 @@
 					演职人员信息暂无
 				</van-divider>
 			</view>
-			<!---------------  剧照  ------------
+			<!---------------  剧照  ---------------
 			<view class="body">
 				<view class="head-title">剧照</view>
 				<scroll-view enable-flex="true" scroll-x="true" style=" white-space: nowrap; ">
@@ -107,7 +105,7 @@
 					</view>
 				</scroll-view>
 			</view>
--->
+			-----------------  剧照  -------------->
 		</van-tab>
 		<!---------------  简介  -------------->
 		<!---------------  影评  --------------
@@ -213,5 +211,16 @@
 
 		</van-tab>
 	</van-tabs>
+
+
+	<view>
+		<block wx:if="{{!isCollect}}">
+			<button bindtap="onCollect"> 点击收藏 </button>
+		</block>
+		<block wx:else>
+			<button bindtap="cancelCollect"> 已收藏 </button>
+		</block>
+	</view>
+
 
 </view>

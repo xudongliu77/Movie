@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/user/user",
     "pages/detail/detail",
+    "pages/collection/collection",
     "pages/comment/comment"
   ],
   "window": {

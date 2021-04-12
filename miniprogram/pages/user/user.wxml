@@ -2,7 +2,7 @@
 	<block wx:if="{{!isLogin}}">
 		<view class="profile" bindtap="getUserProfile">
 			<image class="profile-img" src="../../images/default.png"></image>
-			<text class="profile-name"> 登陆 </text>
+			<text class="profile-name"> 立即登录 </text>
 		</view>
 	</block>
 	<block wx:else>
@@ -18,19 +18,19 @@
 
 	<view class="module" bindtap="">
 		<view class="module-icon">
-			<van-icon name="browsing-history" size="50px" color="#82DCF0" />
+			<van-icon name="clock-o" size="80rpx" color="#82DCF0" />
 		</view>
 		<text class="module-text"> 浏览记录 </text>
 	</view>
-	<view class="module" bindtap="">
+	<view class="module" bindtap="gotoCollection">
 		<view class="module-icon">
-			<van-icon name="star" size="50px" color="#82DCF0" />
+			<van-icon name="star-o" size="80rpx" color="#82DCF0" />
 		</view>
 		<text class="module-text"> 我的收藏 </text>
 	</view>
-	<view class="module" bindtap="gotocomment">
+	<view class="module" bindtap="gotoComment">
 		<view class="module-icon">
-			<van-icon name="comment" size="50px" color="#82DCF0" />
+			<van-icon name="comment-o" size="80rpx" color="#82DCF0" />
 		</view>
 		<text class="module-text"> 我的评价 </text>
 	</view>

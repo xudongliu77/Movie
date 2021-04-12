@@ -2,9 +2,8 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init()
-
-//var rp = require('request-promise');
 const axios = require('axios')
+//var rp = require('request-promise');
 /*
 // 云函数入口函数
 exports.main = async (event, context) => {

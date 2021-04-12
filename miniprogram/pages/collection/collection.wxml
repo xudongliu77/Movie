@@ -1,4 +1,4 @@
-<!--pages/comment/comment.wxml-->
+<!--pages/collection/collection.wxml-->
 <view>
 	<block wx:if="{{!isLogin}}">
 		<view>
@@ -13,5 +13,6 @@
 	</block>
 	<block wx:else>
 		<view wx:key="index" wx:for="{{titleArr}}">{{item}}</view>
+		<view wx:key="index" wx:for="{{idArr}}" bindtap="gotodetail" data-movieid="{{item}}">{{item}}</view>
 	</block>
 </view>

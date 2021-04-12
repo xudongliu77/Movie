@@ -10,7 +10,7 @@ Page({
   data: {
     userInfo: {}, // 用户信息
     hasUserInfo: false,
-    isLogin: false, //登陆状态
+    isLogin: false, //登录状态
     // openid: '',
   },
 
@@ -48,8 +48,15 @@ Page({
       });
   },
 
+  // 跳转 我的收藏 页面
+  gotoCollection: function () {
+    wx.navigateTo({
+      url: `../collection/collection`,
+    });
+  },
+
   // 跳转 我的评价 页面
-  gotocomment: function () {
+  gotoComment: function () {
     wx.navigateTo({
       url: `../comment/comment`,
     });

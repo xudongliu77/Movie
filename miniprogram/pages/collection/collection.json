@@ -3,5 +3,5 @@
     "van-empty": "@vant/weapp/empty",
     "van-button": "@vant/weapp/button"
   },
-  "navigationBarTitleText": "我的评价"
+  "navigationBarTitleText": "我的收藏"
 }

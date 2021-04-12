@@ -1,4 +1,4 @@
-// pages/comment/comment.js
+// pages/collection/collection.js
 const app = getApp();
 const db = wx.cloud.database(); // 初始化数据库
 
@@ -8,32 +8,44 @@ Page({
    * 页面的初始数据
    */
   data: {
-    titleArr: [], // 评价过的电影名称
-    isLogin: false, // 登录状态
+    titleArr: [], // 收藏的电影名称
+    idArr: [], // 收藏的电影ID
+    isLogin: false, //登录状态
   },
 
-  // 获取用户评价信息
-  getComment: function () {
+  // 获取用户收藏信息
+  getCollection: function () {
     let that = this;
     let movieArr = [];
-    db.collection('comment').get({
+    let movieidArr = [];
+    db.collection('collection').get({
       success(res) {
-        console.log("用户评论信息请求成功", res.data);
+        console.log("用户收藏信息请求成功", res.data);
         let movieList = res.data;
         // console.log(movieList);
         for (let i = 0; i < movieList.length; i++) {
           movieArr.push(movieList[i].movie);
+          movieidArr.push(movieList[i].movieid);
         }
         // console.log(movieArr);
         that.setData({
           titleArr: movieArr,
+          idArr: movieidArr,
         });
         console.log(that.data.titleArr);
+        console.log(that.data.idArr);
       },
       fail(res) {
-        console.log("用户评论信息请求失败", res);
+        console.log("用户收藏信息请求失败", res);
       }
     })
+  },
+
+  // 跳转详情页
+  gotodetail: function (event) {
+    wx.navigateTo({
+      url: `../detail/detail?movieid=${event.currentTarget.dataset.movieid}`,
+    });
   },
 
   // 返回登录页面
@@ -51,7 +63,7 @@ Page({
       this.setData({
         isLogin: true,
       })
-      this.getComment();
+      this.getCollection();
     }
   },
 

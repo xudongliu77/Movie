@@ -7,7 +7,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    detail: {},
+    detail: {}, // 电影详情
     content: '', // 评价的内容
     score: 5, // 评价的分数
     images: [], // 上传的图片
@@ -17,26 +17,11 @@ Page({
     active: 0, // 标签页
     isFolded: false,
     isHide: false,
+    recordid: '', // 记录_id
+    isCollect: false, // 收藏状态
     activeNames: [],
   },
-  /*
-    //获取电影详情
-    getDetail(movieid) {
-      wx.showLoading({
-        title: '加载中'
-      })
-      wx.request({
-        url: `https://frodo.douban.com/api/v2/movie/${movieid}?apiKey=054022eaeae0b00e0fc068c0c0a2102a`,
-        success: res => {
-          //console.log(res.data)
-          this.setData({
-            detail: res.data
-          })
-          wx.hideLoading()
-        }
-      })
-    },
-  */
+
   onChange(event) {
     this.setData({
       activeNames: event.detail
@@ -121,12 +106,12 @@ Page({
       }).then(res => {
         wx.hideLoading();
         wx.showToast({
-          title: '评价成功',
+          title: '提交成功',
         })
       }).catch(err => {
         wx.hideLoading();
         wx.showToast({
-          title: '评价失败',
+          title: '提交失败',
         })
       })
 
@@ -176,6 +161,70 @@ Page({
     })
   },
 
+  // 查询数据库记录
+  search: function () {
+    db.collection('collection').where({
+      movieid: this.data.movieId,
+    }).get().then(res => {
+      // console.log(res);
+      if (res.data.length > 0) {
+        this.setData({
+          recordid: res.data[0]._id
+        })
+        // console.log(this.data.recordid);
+        this.setData({
+          isCollect: true
+        })
+      }
+    }).catch(err => {
+      console.log(err);
+    })
+  },
+
+  // 收藏
+  onCollect: function () {
+    db.collection('collection').add({
+      data: {
+        movieid: this.data.movieId,
+        movie: this.data.movie,
+      }
+    }).then(res => {
+      wx.showToast({
+        title: '收藏成功',
+      })
+      this.setData({
+        isCollect: true
+      })
+    }).catch(err => {
+      wx.showToast({
+        title: '收藏失败',
+      })
+    })
+  },
+
+  // 取消收藏
+  cancelCollect: function () {
+    db.collection('collection')
+      .doc(this.data.recordid)
+      .remove({
+        success: res => {
+          wx.showToast({
+            title: '取消收藏成功',
+          })
+          this.setData({
+            isCollect: false
+          })
+        },
+        fail: err => {
+          wx.showToast({
+            icon: 'none',
+            title: '取消收藏失败',
+          })
+          console.error('[数据库] [删除记录] 失败：', err)
+        }
+      })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -184,8 +233,7 @@ Page({
       movieId: options.movieid,
     });
     console.log(options);
-
-    //this.getDetail(options.movieid);
+    this.search();
 
     wx.showLoading({
       title: '加载中',
@@ -203,40 +251,12 @@ Page({
           detail: res.result,
           movie: res.result.title,
         });
-
         this.onFold();
-
         wx.hideLoading();
       }).catch(err => {
         console.error(err);
         wx.hideLoading();
       });
-
-
-
-    /*
-        //展示评价
-        let that = this;
-        let contentArr = [];
-        let scoreArr = [];
-        db.collection("comment").get({
-          success(res) {
-            console.log("请求成功", res.data)
-            let dataList = res.data;
-            for (let i = 0; i < dataList.length; i++) {
-              contentArr.push(dataList[i].content),
-                scoreArr.push(dataList[i].score)
-            }
-            that.setData({
-              content: contentArr,
-              score: scoreArr
-            })
-          },
-          fail(res) {
-            console.log("请求失败", res)
-          }
-        })
-    */
   },
 
   /**
