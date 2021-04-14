@@ -1,0 +1,33 @@
+<!--pages/history/history.wxml-->
+<view>
+	<block wx:if="{{!isLogin}}">
+		<view>
+			<van-empty description="您还没有登录哦">
+				<view bindtap="getBack">
+					<van-button round type="danger">
+						去登录
+					</van-button>
+				</view>
+			</van-empty>
+		</view>
+	</block>
+	<block wx:elif="{{historyList.length}}">
+		<view class="body" wx:key="index" wx:for="{{historyList}}">
+			<view class="title">{{item.movie}}</view>
+			<view class="Btn">
+				<view class="viewBtn" bindtap="gotodetail" data-movieid="{{item.movieid}}">
+					查看详情
+				</view>
+				<view class="deleteBtn" bindtap="deleteHistory" data-recordid="{{item._id}}">
+					删除记录
+				</view>
+			</view>
+		</view>
+		<view class="Btnbody">
+			<view class="cleanBtn" bindtap=""> 清空浏览记录 </view>
+		</view>
+	</block>
+	<block wx:else>
+		<van-empty description="您还没有产生足迹,去逛一逛吧" />
+	</block>
+</view>

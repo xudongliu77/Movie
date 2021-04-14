@@ -111,7 +111,7 @@ Page({
     })
   },
 
-  // 查询数据库记录
+  // 查询收藏集合记录
   search: function () {
     db.collection('collection').where({
       movieid: this.data.movieId,
@@ -124,6 +124,31 @@ Page({
         // console.log(this.data.recordid);
         this.setData({
           isCollect: true
+        })
+      }
+    }).catch(err => {
+      console.log(err);
+    })
+  },
+
+  // 历史记录
+  onHistory: function () {
+    db.collection('history').where({
+      movieid: this.data.movieId,
+    }).get().then(res => {
+      // console.log(res);
+      if (res.data.length > 0) {
+        console.log("记录已插入,不重复添加");
+      } else {
+        db.collection('history').add({
+          data: {
+            movieid: this.data.movieId,
+            movie: this.data.movie,
+          }
+        }).then(res => {
+          console.log("添加历史记录成功", res);
+        }).catch(err => {
+          console.log("添加历史记录失败", err);
         })
       }
     }).catch(err => {
@@ -200,6 +225,7 @@ Page({
           detail: res.result,
           movie: res.result.title,
         });
+        this.onHistory();
         this.onFold();
         wx.hideLoading();
       }).catch(err => {

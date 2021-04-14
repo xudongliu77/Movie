@@ -16,7 +16,7 @@
 
 <view class="user-function">
 
-	<view class="module" bindtap="">
+	<view class="module" bindtap="gotoHistory">
 		<view class="module-icon">
 			<van-icon name="clock-o" size="80rpx" color="#82DCF0" />
 		</view>

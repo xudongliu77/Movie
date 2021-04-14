@@ -48,6 +48,13 @@ Page({
       });
   },
 
+  // 跳转 浏览记录 页面
+  gotoHistory: function () {
+    wx.navigateTo({
+      url: `../history/history`,
+    });
+  },
+
   // 跳转 我的收藏 页面
   gotoCollection: function () {
     wx.navigateTo({
