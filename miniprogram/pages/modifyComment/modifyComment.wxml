@@ -1,0 +1,14 @@
+<!--pages/modifyComment/modifyComment.wxml-->
+<view class="comment-container">
+	<view class="movie">{{movie}}</view>
+	<view class="van-rate">
+		<van-rate value="{{ score }}" allow-half bind:change="onScoreChange" />
+		<text style="font-size:32rpx; color: #e6e6e6"> 滑动进行评分~ </text>
+	</view>
+
+	<van-field value="{{ content }}" left-icon="edit" border="{{false}}" clearable="true" type="textarea" autosize placeholder="写一些评价吧" bind:change="onContentChange" />
+
+	<view class="van-btn">
+		<van-button size="large" type="info" plain bindtap="modifyComment"> 提交修改 </van-button>
+	</view>
+</view>

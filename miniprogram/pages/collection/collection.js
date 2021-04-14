@@ -2,38 +2,37 @@
 const app = getApp();
 const db = wx.cloud.database(); // 初始化数据库
 
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    titleArr: [], // 收藏的电影名称
-    idArr: [], // 收藏的电影ID
+    collectionList: [], // 收藏的电影列表
+    // recordid: '', // 记录_id
     isLogin: false, //登录状态
   },
 
   // 获取用户收藏信息
   getCollection: function () {
     let that = this;
-    let movieArr = [];
-    let movieidArr = [];
     db.collection('collection').get({
       success(res) {
         console.log("用户收藏信息请求成功", res.data);
         let movieList = res.data;
-        // console.log(movieList);
-        for (let i = 0; i < movieList.length; i++) {
-          movieArr.push(movieList[i].movie);
-          movieidArr.push(movieList[i].movieid);
-        }
-        // console.log(movieArr);
         that.setData({
-          titleArr: movieArr,
-          idArr: movieidArr,
-        });
-        console.log(that.data.titleArr);
-        console.log(that.data.idArr);
+          collectionList: movieList
+        })
+        console.log("收藏的电影列表 ", that.data.collectionList);
+        /* let recordidArr = [];
+        for (let i = 0; i < movieList.length; i++) {
+          recordidArr.push(movieList[i]._id);
+        }
+        console.log(recordidArr);
+        that.setData({
+          recordid: recordidArr,
+        }); */
       },
       fail(res) {
         console.log("用户收藏信息请求失败", res);
@@ -46,6 +45,28 @@ Page({
     wx.navigateTo({
       url: `../detail/detail?movieid=${event.currentTarget.dataset.movieid}`,
     });
+  },
+
+  // 取消收藏
+  cancelCollect: function (event) {
+    // for (let i = 0; i < this.data.recordid.length; i++) {
+    // }
+    db.collection('collection')
+      .doc(event.currentTarget.dataset.recordid)
+      .remove({
+        success: res => {
+          wx.showToast({
+            title: '取消成功',
+          });
+          this.getCollection();
+        },
+        fail: err => {
+          wx.showToast({
+            title: '取消失败',
+          })
+          console.error('[数据库] [删除记录] 失败：', err)
+        }
+      })
   },
 
   // 返回登录页面
@@ -78,7 +99,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getCollection();
   },
 
   /**

@@ -1,1 +1,68 @@
 /* pages/comment/comment.wxss */
+.body {
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  background-color: #F6F6F6;
+  border-radius: 20rpx;
+  margin: 20rpx;
+}
+
+.comment {
+  padding: 20rpx;
+}
+
+.movie {
+  display: flex;
+}
+
+.rate {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0 20rpx 0;
+}
+
+.score {
+  padding-left: 20rpx;
+}
+
+.content {
+  overflow-wrap: break-word
+}
+
+.Btn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 20rpx 20rpx 20rpx;
+}
+
+.modifyBtn {
+  display: flex;
+  font-size: 30rpx;
+  color: #82DCF0;
+  margin-right: 20rpx;
+}
+
+.deleteBtn {
+  display: flex;
+  font-size: 30rpx;
+  color: red;
+  margin-right: 30rpx;
+}
+
+.Btnbody {
+  height: 120rpx;
+  width: 100%;
+}
+
+.cleanBtn {
+  height: 120rpx;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}

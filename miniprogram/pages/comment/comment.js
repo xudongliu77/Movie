@@ -8,27 +8,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-    titleArr: [], // 评价过的电影名称
+    // titleArr: [], // 评价过的电影名称
+    commentList: [], // 评价列表
     isLogin: false, // 登录状态
   },
 
   // 获取用户评价信息
   getComment: function () {
     let that = this;
-    let movieArr = [];
+    // let movieArr = [];
     db.collection('comment').get({
       success(res) {
         console.log("用户评论信息请求成功", res.data);
         let movieList = res.data;
-        // console.log(movieList);
-        for (let i = 0; i < movieList.length; i++) {
-          movieArr.push(movieList[i].movie);
-        }
-        // console.log(movieArr);
         that.setData({
+          commentList: movieList
+        });
+        console.log("评价列表", that.data.commentList);
+        // console.log(movieList);
+        /* for (let i = 0; i < movieList.length; i++) {
+          movieArr.push(movieList[i].movie);
+        } */
+        // console.log(movieArr);
+        /* that.setData({
           titleArr: movieArr,
         });
-        console.log(that.data.titleArr);
+        console.log(that.data.titleArr); */
       },
       fail(res) {
         console.log("用户评论信息请求失败", res);
@@ -41,6 +46,35 @@ Page({
     wx.navigateBack({
       delta: 1
     })
+  },
+
+  // 修改评价
+  gotoCotent: function (event) {
+    wx.navigateTo({
+      url: `../modifyComment/modifyComment?recordid=${event.currentTarget.dataset.recordid}`,
+    });
+  },
+
+  // 删除评价
+  deleteComment: function (event) {
+    // for (let i = 0; i < this.data.recordid.length; i++) {
+    // }
+    db.collection('comment')
+      .doc(event.currentTarget.dataset.recordid)
+      .remove({
+        success: res => {
+          wx.showToast({
+            title: '删除成功',
+          });
+          this.getComment();
+        },
+        fail: err => {
+          wx.showToast({
+            title: '删除失败',
+          })
+          console.error('[数据库] [删除记录] 失败：', err)
+        }
+      })
   },
 
   /**
@@ -66,7 +100,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getComment();
   },
 
   /**

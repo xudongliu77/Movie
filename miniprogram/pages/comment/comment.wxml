@@ -2,7 +2,7 @@
 <view>
 	<block wx:if="{{!isLogin}}">
 		<view>
-			<van-empty description="请登录后查看">
+			<van-empty description="您还没有登录哦">
 				<view bindtap="getBack">
 					<van-button round type="danger">
 						去登录
@@ -11,7 +11,36 @@
 			</van-empty>
 		</view>
 	</block>
+	<block wx:elif="{{commentList.length}}">
+		<view class="body" wx:key="index" wx:for="{{commentList}}">
+			<view class="comment">
+				<view class="movie">
+					<text style="padding-right:20rpx;"> 电影名: </text>
+					<view>{{item.movie}}</view>
+				</view>
+				<view class="rate">
+					<text style="padding-right:20rpx;"> 评分: </text>
+					<van-rate value="{{ item.score }}" allow-half="true" />
+					<!-- <view class="score" style="color:#fc0;">{{item.score*2.0}}</view> -->
+				</view>
+				<view class="content"> 内容: {{item.content}}</view>
+			</view>
+			<view class="Btn">
+				<view class="modifyBtn" bindtap="gotoCotent" data-recordid="{{item._id}}">
+					<van-icon name="edit" />
+					<view style="margin-left:10rpx"> 修改 </view>
+				</view>
+				<view class="deleteBtn" bindtap="deleteComment" data-recordid="{{item._id}}">
+					<van-icon name="delete-o" />
+					<view style="margin-left:10rpx"> 删除 </view>
+				</view>
+			</view>
+		</view>
+		<view class="Btnbody">
+			<view class="cleanBtn" bindtap=""> 清空全部评价 </view>
+		</view>
+	</block>
 	<block wx:else>
-		<view wx:key="index" wx:for="{{titleArr}}">{{item}}</view>
+		<van-empty description="您还没有发表过评价,去逛一逛吧" />
 	</block>
 </view>

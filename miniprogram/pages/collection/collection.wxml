@@ -2,7 +2,7 @@
 <view>
 	<block wx:if="{{!isLogin}}">
 		<view>
-			<van-empty description="请登录后查看">
+			<van-empty description="您还没有登录哦">
 				<view bindtap="getBack">
 					<van-button round type="danger">
 						去登录
@@ -11,8 +11,23 @@
 			</van-empty>
 		</view>
 	</block>
+	<block wx:elif="{{collectionList.length}}">
+		<view class="body" wx:key="index" wx:for="{{collectionList}}">
+			<view class="title">{{item.movie}}</view>
+			<view class="Btn">
+				<view class="viewBtn" bindtap="gotodetail" data-movieid="{{item.movieid}}">
+					查看详情
+				</view>
+				<view class="cancelBtn" bindtap="cancelCollect" data-recordid="{{item._id}}">
+					取消收藏
+				</view>
+			</view>
+		</view>
+		<view class="Btnbody">
+			<view class="cleanBtn" bindtap=""> 清空全部收藏 </view>
+		</view>
+	</block>
 	<block wx:else>
-		<view wx:key="index" wx:for="{{titleArr}}">{{item}}</view>
-		<view wx:key="index" wx:for="{{idArr}}" bindtap="gotodetail" data-movieid="{{item}}">{{item}}</view>
+		<van-empty description="您还没有收藏任何电影,去逛一逛吧" />
 	</block>
 </view>

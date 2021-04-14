@@ -1,7 +1,9 @@
 {
   "usingComponents": {
     "van-empty": "@vant/weapp/empty",
-    "van-button": "@vant/weapp/button"
+    "van-button": "@vant/weapp/button",
+    "van-rate": "@vant/weapp/rate",
+    "van-icon": "@vant/weapp/icon"
   },
   "navigationBarTitleText": "我的评价"
 }

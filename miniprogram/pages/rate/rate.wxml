@@ -1,0 +1,25 @@
+<!--pages/rate/rate.wxml-->
+<view class="comment-container">
+	<view class="movie">{{movie}}</view>
+	<view class="van-rate">
+		<van-rate value="{{ score }}" allow-half="true" bind:change="onScoreChange" />
+		<text style="font-size:32rpx; color: #e6e6e6"> 滑动进行评分~ </text>
+	</view>
+
+	<van-field value="{{ content }}" left-icon="edit" border="{{false}}" clearable="true" type="textarea" autosize placeholder="写一些评价吧" bind:change="onContentChange" />
+
+	<view style="padding-left: 16rpx; padding-right: 16rpx">
+		<image class="comment-img" mode="scaleToFill" src="{{item}}" wx:for="{{images}}" wx:key="index"></image>
+	</view>
+	<view wx:if="{{!images.length}}" class="imgModel" bindtap="uploadImg">
+		<van-icon name="photograph" size="60rpx" color="#DDDFE1" />
+	</view>
+
+	<view wx:if="{{images.length}}" class="van-button">
+		<van-button size="large" icon="photo" type="primary" plain bindtap="uploadImg"> 添加图片 </van-button>
+	</view>
+
+	<view class="van-btn">
+		<van-button size="large" type="info" plain bindtap="submit"> 提交评价 </van-button>
+	</view>
+</view>

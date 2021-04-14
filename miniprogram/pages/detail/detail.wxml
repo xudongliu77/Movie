@@ -129,47 +129,22 @@
 
 
 		<!---------------  评价  -------------->
-		<van-tab info="{{detail.comments_count}}" title="评价">
+		<van-tab info="{{detail.comments_count}}" title="短评">
 
-			<!-- <view class='comments' wx:for="{{detail.popular_comments}}" wx:key="index" wx:for-item="itemf">
+			<view class='comments' wx:for="{{comments}}" wx:key="index">
 				<view class='comments-info'>
-					<image style="width: 100rpx; height: 100rpx; margin:10rpx; border-radius: 50%;" src="{{itemf.author.avatar}}" mode="scaleToFill"></image>
+					<image style="width: 100rpx; height: 100rpx; margin:10rpx; border-radius: 50%;" src="{{item.url}}" mode="scaleToFill"></image>
 					<view>
-						<view class='comments-nm'>{{itemf.author.name}}</view>
+						<view class='comments-nm'>{{item.name}}</view>
 						<view>
-							<van-rate readonly size="{{ 16 }}" value="{{ itemf.rating.value }}" />
+							<van-rate readonly size="{{ 16 }}" value="{{item.rate}}" />
 						</view>
 					</view>
 				</view>
-				<view class="comments-content">{{itemf.content}}</view>
+				<view class="comments-content">{{item.comment}}</view>
 				<view class='comments-date'>
-					<view class='date'>{{itemf.created_at}}</view>
-					<view class='count'>{{itemf.useful_count}} 有用</view>
-				</view>
-			</view> -->
-
-
-			<view class="comment-container">
-
-				<view class="van-rate">
-					<van-rate value="{{ score }}" allow-half bind:change="onScoreChange" />
-				</view>
-
-				<van-field value="{{ content }}" type="textarea" autosize placeholder="写一些评价吧" bind:change="onContentChange" />
-
-				<view style="padding-left: 16rpx; padding-right: 16rpx">
-					<image class="comment-img" mode="scaleToFill" src="{{item}}" wx:for="{{images}}" wx:key="index"></image>
-				</view>
-				<view wx:if="{{!images.length}}" class="imgModel" bindtap="uploadImg">
-					<van-icon name="photograph" size="60rpx" color="#DDDFE1" />
-				</view>
-
-				<view wx:if="{{images.length}}" class="van-button">
-					<van-button size="large" icon="photo" type="primary" plain bindtap="uploadImg"> 添加图片 </van-button>
-				</view>
-
-				<view class="van-btn">
-					<van-button size="large" type="info" plain bindtap="submit"> 提交评价 </van-button>
+					<view class='date'>{{item.date}}</view>
+					<!-- <view class='count'>{{itemf.useful_count}} 有用</view> -->
 				</view>
 			</view>
 
@@ -212,15 +187,25 @@
 		</van-tab>
 	</van-tabs>
 
+</view>
 
-	<view>
+<view class="bottom-body">
+	<view class="bottom">
 		<block wx:if="{{!isCollect}}">
-			<button bindtap="onCollect"> 点击收藏 </button>
+			<view class="collectBtn" bindtap="onCollect">
+				<van-icon name="star-o" />
+				<view style="padding-left: 16rpx;"> 收藏 </view>
+			</view>
 		</block>
 		<block wx:else>
-			<button bindtap="cancelCollect"> 已收藏 </button>
+			<view class="collectBtn" bindtap="cancelCollect">
+				<van-icon name="star" />
+				<view style="padding-left: 16rpx;"> 收藏 </view>
+			</view>
 		</block>
+		<view class="rateBtn" bindtap="gotoRate">
+			<van-icon name="edit" />
+			<view style="padding-left: 16rpx;"> 写评价 </view>
+		</view>
 	</view>
-
-
 </view>

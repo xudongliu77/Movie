@@ -1,0 +1,23 @@
+/* pages/modifyComment/modifyComment.wxss */
+.comment-container {
+  padding: 0rpx;
+}
+
+.movie {
+  margin-left: 32rpx;
+  margin-right: 32rpx;
+  margin-top: 20rpx;
+  padding-bottom: 10rpx;
+  border-bottom: 1rpx solid #e6e6e6;
+}
+
+.van-rate {
+  height: 60rpx;
+  padding: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.van-btn {
+  padding: 0rpx 30rpx 30rpx 30rpx;
+}

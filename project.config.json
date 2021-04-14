@@ -61,6 +61,13 @@
 					"pathName": "pages/detail/detail",
 					"query": "movieid=35158160",
 					"scene": null
+				},
+				{
+					"id": 2,
+					"name": "pages/rate/rate",
+					"pathName": "pages/rate/rate",
+					"query": "movieid=30279836&movie=第十一回",
+					"scene": null
 				}
 			]
 		}

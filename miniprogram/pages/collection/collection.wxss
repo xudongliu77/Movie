@@ -1,1 +1,50 @@
 /* pages/collection/collection.wxss */
+.body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #F6F6F6;
+  border-radius: 20rpx;
+  height: 80rpx;
+  margin: 20rpx;
+}
+
+.title {
+  font-size: 36rpx;
+  margin-left: 30rpx;
+}
+
+.Btn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.viewBtn {
+  font-size: 30rpx;
+  color: #82DCF0;
+  margin-right: 20rpx;
+}
+
+.cancelBtn {
+  font-size: 30rpx;
+  color: red;
+  margin-right: 30rpx;
+}
+
+.Btnbody {
+  height: 120rpx;
+  width: 100%;
+}
+
+.cleanBtn {
+  height: 120rpx;
+  color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+}
