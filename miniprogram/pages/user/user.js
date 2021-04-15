@@ -10,8 +10,8 @@ Page({
   data: {
     userInfo: {}, // 用户信息
     hasUserInfo: false,
-    isLogin: false, //登录状态
-    // openid: '',
+    isLogin: false, // 登录状态
+    openid: '',
   },
 
   getUserProfile(e) {
@@ -26,7 +26,7 @@ Page({
         app.globalData.logged = true;
         // console.log(app.globalData.logged);
         console.log(res.userInfo);
-        // this.getOpenId();
+        this.getOpenId();
       }
     })
   },
@@ -51,21 +51,21 @@ Page({
   // 跳转 浏览记录 页面
   gotoHistory: function () {
     wx.navigateTo({
-      url: `../history/history`,
+      url: `../history/history?openid=${this.data.openid}`,
     });
   },
 
   // 跳转 我的收藏 页面
   gotoCollection: function () {
     wx.navigateTo({
-      url: `../collection/collection`,
+      url: `../collection/collection?openid=${this.data.openid}`,
     });
   },
 
   // 跳转 我的评价 页面
   gotoComment: function () {
     wx.navigateTo({
-      url: `../comment/comment`,
+      url: `../comment/comment?openid=${this.data.openid}`,
     });
   },
 

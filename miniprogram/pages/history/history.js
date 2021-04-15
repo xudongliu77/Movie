@@ -10,8 +10,11 @@ Page({
    */
   data: {
     historyList: [], // 浏览过的电影
-    isLogin: false, //登录状态
+    isLogin: false, // 登录状态
+    aggregate: '', // 操作的集合
+    openid: '',
   },
+
 
   // 获取用户浏览记录
   getHistory: function () {
@@ -60,6 +63,30 @@ Page({
       })
   },
 
+  // 清空浏览记录
+  batchDelete: function () {
+    wx.cloud.callFunction({
+        name: 'batchDelete',
+        data: {
+          aggregate: this.data.aggregate,
+          openid: this.data.openid,
+        }
+      })
+      .then(res => {
+        console.log(res);
+        wx.showToast({
+          title: '已清空',
+        })
+        this.getHistory();
+      }).catch(err => {
+        console.error(err);
+        wx.showToast({
+          title: '清空失败',
+        })
+      });
+  },
+
+
   // 返回登录页面
   getBack: function () {
     wx.navigateBack({
@@ -75,6 +102,8 @@ Page({
     if (app.globalData.logged) {
       this.setData({
         isLogin: true,
+        aggregate: 'history',
+        openid: options.openid,
       })
       this.getHistory();
     }

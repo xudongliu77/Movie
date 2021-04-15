@@ -11,6 +11,8 @@ Page({
     // titleArr: [], // 评价过的电影名称
     commentList: [], // 评价列表
     isLogin: false, // 登录状态
+    aggregate: '', // 操作的集合
+    openid: '',
   },
 
   // 获取用户评价信息
@@ -77,6 +79,29 @@ Page({
       })
   },
 
+  // 清空评价记录
+  batchDelete: function () {
+    wx.cloud.callFunction({
+        name: 'batchDelete',
+        data: {
+          aggregate: this.data.aggregate,
+          openid: this.data.openid,
+        }
+      })
+      .then(res => {
+        console.log(res);
+        wx.showToast({
+          title: '已清空',
+        })
+        this.getComment();
+      }).catch(err => {
+        console.error(err);
+        wx.showToast({
+          title: '清空失败',
+        })
+      });
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
@@ -84,6 +109,8 @@ Page({
     if (app.globalData.logged) {
       this.setData({
         isLogin: true,
+        aggregate: 'comment',
+        openid: options.openid,
       })
       this.getComment();
     }

@@ -37,7 +37,7 @@
 			</view>
 		</view>
 		<view class="Btnbody">
-			<view class="cleanBtn" bindtap=""> 清空全部评价 </view>
+			<view class="cleanBtn" bindtap="batchDelete"> 清空全部评价 </view>
 		</view>
 	</block>
 	<block wx:else>

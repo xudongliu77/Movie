@@ -11,7 +11,9 @@ Page({
   data: {
     collectionList: [], // 收藏的电影列表
     // recordid: '', // 记录_id
-    isLogin: false, //登录状态
+    isLogin: false, // 登录状态
+    aggregate: '', // 操作的集合
+    openid: '',
   },
 
   // 获取用户收藏信息
@@ -69,6 +71,29 @@ Page({
       })
   },
 
+  // 清空收藏记录
+  batchDelete: function () {
+    wx.cloud.callFunction({
+        name: 'batchDelete',
+        data: {
+          aggregate: this.data.aggregate,
+          openid: this.data.openid,
+        }
+      })
+      .then(res => {
+        console.log(res);
+        wx.showToast({
+          title: '已清空',
+        })
+        this.getCollection();
+      }).catch(err => {
+        console.error(err);
+        wx.showToast({
+          title: '清空失败',
+        })
+      });
+  },
+
   // 返回登录页面
   getBack: function () {
     wx.navigateBack({
@@ -83,6 +108,8 @@ Page({
     if (app.globalData.logged) {
       this.setData({
         isLogin: true,
+        aggregate: 'collection',
+        openid: options.openid,
       })
       this.getCollection();
     }

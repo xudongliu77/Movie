@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "van-empty": "@vant/weapp/empty",
-    "van-button": "@vant/weapp/button"
+    "van-button": "@vant/weapp/button",
+    "van-dialog": "@vant/weapp/dialog"
   },
   "navigationBarTitleText": "浏览记录"
 }

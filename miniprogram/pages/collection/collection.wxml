@@ -24,7 +24,7 @@
 			</view>
 		</view>
 		<view class="Btnbody">
-			<view class="cleanBtn" bindtap=""> 清空全部收藏 </view>
+			<view class="cleanBtn" bindtap="batchDelete"> 清空全部收藏 </view>
 		</view>
 	</block>
 	<block wx:else>

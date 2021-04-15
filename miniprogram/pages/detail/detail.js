@@ -146,9 +146,9 @@ Page({
             movie: this.data.movie,
           }
         }).then(res => {
-          console.log("添加历史记录成功", res);
+          console.log("添加浏览记录成功", res);
         }).catch(err => {
-          console.log("添加历史记录失败", err);
+          console.log("添加浏览记录失败", err);
         })
       }
     }).catch(err => {
