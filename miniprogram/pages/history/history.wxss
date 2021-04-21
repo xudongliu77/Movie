@@ -12,6 +12,10 @@
 .title {
   font-size: 36rpx;
   margin-left: 30rpx;
+  width: 360rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .Btn {

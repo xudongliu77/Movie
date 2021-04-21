@@ -27,7 +27,38 @@ Page({
         // console.log(app.globalData.logged);
         console.log(res.userInfo);
         this.getOpenId();
+        this.onUserInfo();
       }
+    })
+  },
+
+  // 上传用户信息
+  onUserInfo: function () {
+    db.collection('user').where({
+      _openid: this.data.openid,
+    }).get().then(res => {
+      // console.log(res);
+      if (res.data.length > 0) {
+        console.log("用户信息已添加,不重复添加");
+      } else {
+        db.collection('user').add({
+          data: {
+            img: this.data.userInfo.avatarUrl,
+            name: this.data.userInfo.nickName,
+            gender: this.data.userInfo.gender,
+            country: this.data.userInfo.country,
+            language: this.data.userInfo.language,
+            province: this.data.userInfo.province,
+            city: this.data.userInfo.city,
+          }
+        }).then(res => {
+          console.log("添加用户信息成功", res);
+        }).catch(err => {
+          console.log("添加用户信息失败", err);
+        })
+      }
+    }).catch(err => {
+      console.log(err);
     })
   },
 
