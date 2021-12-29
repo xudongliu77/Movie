@@ -53,14 +53,15 @@
 							<view style="display: inline-block">
 								<view class="actors-card">
 									<view>
-										<image src="{{item.avatar.normal}}"></image>
+										<!-- <image src="{{item.avatar.normal}}"></image> -->
+										<image src="../../images/lack.png"></image>
 									</view>
 									<view class="actors-nm">{{item.name}}</view>
 								</view>
 							</view>
 						</view>
 
-						<view wx:for="{{detail.actors}}" wx:key="index">
+						<!-- <view wx:for="{{detail.actors}}" wx:key="index">
 							<view style="display: inline-block">
 								<view class="actors-card">
 									<view>
@@ -69,13 +70,14 @@
 									<view class="actors-nm">{{item.name}}</view>
 								</view>
 							</view>
-						</view>
+						</view> -->
 
 						<view wx:for="{{detail.actors}}" wx:key="index">
 							<view style="display: inline-block">
 								<view class="actors-card">
 									<view>
-										<image src="{{item.avatar.normal}}"></image>
+										<!-- <image src="{{item.avatar.normal}}"></image> -->
+										<image src="../../images/lack.png"></image>
 									</view>
 									<view class="actors-nm">{{item.name}}</view>
 								</view>

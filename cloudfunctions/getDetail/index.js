@@ -30,7 +30,7 @@ exports.main = async (event, context) => {
         "Host": "frodo.douban.com",
         "Connection": "keep-alive",
         'content-type': 'application/json',
-        'Accept-Encoding': 'gzip,compress,br,deflate',
+        // 'Accept-Encoding': 'gzip,compress,br,deflate',
         'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 MicroMessenger/8.0.2(0x18000236) NetType/WIFI Language/zh_CN',
         'Referer': 'https://servicewechat.com/wx2f9b06c1de1ccfca/81/page-frame.html'
       }
